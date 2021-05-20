@@ -41,6 +41,8 @@ def videos(request):
     return render(request,"videos.html",context)
 
 def contact_us(request):
+    context['msg'] = ""
+    context['msg_type'] = ""
     if request.POST:
         first_name = request.POST.get('name')
         last_name  = request.POST.get('surname')
