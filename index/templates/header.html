@@ -168,11 +168,12 @@
   {% for about_us in about_us%}
   <div class="container-fluid" style="bottom:0;margin-bottom: 0px;margin-top:60px; background-color: #2887C1; font-family: 'Varela Round', sans-serif;">
     <div class="row">
-      <div class="col-lg-5 col-sm-5 col-md-5" style="padding:10px; color:white">
-          <h5><b>Contact Details</b></h5><br>
+      <div class="col-lg-4 col-sm-4 col-md-4" style="padding:10px; color:white">
+          <br>
           <div class="">
-           <div class="card shadow-lg p-2 mb-2  rounded" style="width:340px; border: 1px solid#D5D5D5; font-family: 'Varela Round', sans-serif; background-color:rgba(240, 250, 255, 0.2);">
+           <div class="card shadow-lg p-2 mb-2  rounded" style="border: 1px solid#D5D5D5; font-family: 'Varela Round', sans-serif; background-color:rgba(240, 250, 255, 0.2);">
                <div class="card-header">
+                <h6><b>Contact Details:</b></h6>
                 <b>{{about_us.name}} </b>  <br>
                 <i class="fas fa-phone-alt" aria-hidden="true" style="color: white;"></i>  {{about_us.phone_number}} <br>
                 <i class="fa fa-envelope" aria-hidden="true" style="color: white;"></i>  {{about_us.email_id}}
@@ -181,7 +182,7 @@
           </div>
       </div>
   
-      <div class="col-lg-3 col-sm-3 col-md-3" style="padding:20px; color:white">
+      <div class="col-lg-4 col-sm-4 col-md-4" style="padding:20px; color:white">
           <h5><b>Quick Links</b></h5><br>
           <a style="text-decoration:none;color: white;" href="{{about_us.social_facebook}}"> <i class="fab fa-facebook" aria-hidden="true" style="font-size: 35px;"></i></a>  &nbsp;
           <a style="text-decoration:none;color: white;" href="{{about_us.social_twitter}}"> <i class="fab fa-twitter" aria-hidden="true" style="font-size: 35px;"></i></a>&nbsp;
