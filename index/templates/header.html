@@ -105,12 +105,12 @@
                 <i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size: 20px;"></i>&nbsp;
                 <span>{{about_us.location}}</span>
               </div>
-              <div class="col-lg-4 col-sm-4 col-md-4">
+              <div class="col-lg-3 col-sm-3 col-md-3">
                 <i class="fas fa-phone-alt" aria-hidden="true" style="font-size: 20px;"></i>&nbsp;
                 <span>{{about_us.phone_number}}</span>
               </div>
 
-              <div class="col-lg-4 col-sm-4 col-md-4">
+              <div class="col-lg-5 col-sm-5 col-md-5">
                 <i class="far fa-envelope" aria-hidden="true" style="font-size: 20px;"></i>&nbsp;
                 <span>{{about_us.email_id}}</span>
               </div>
@@ -165,12 +165,12 @@
 <script src="https://kit.fontawesome.com/6a0ca021ad.js" crossorigin="anonymous"></script>
 <footer>
   {% for about_us in about_us%}
-  <div class="container-fluid" style="margin-top:60px; background-color: #2887C1; font-family: 'Varela Round', sans-serif;">
+  <div class="container-fluid" style="bottom:0;margin-bottom: 0px;margin-top:60px; background-color: #2887C1; font-family: 'Varela Round', sans-serif;">
     <div class="row">
-      <div class="col-lg-9 col-sm-9 col-md-9" style="padding:10px; color:white">
+      <div class="col-lg-5 col-sm-5 col-md-5" style="padding:10px; color:white">
           <h5><b>Contact Details</b></h5><br>
           <div class="">
-           <div class="card shadow-lg p-2 mb-2  rounded" style="width:325px; border: 1px solid#D5D5D5; font-family: 'Varela Round', sans-serif; background-color:rgba(240, 250, 255, 0.2);">
+           <div class="card shadow-lg p-2 mb-2  rounded" style="width:340px; border: 1px solid#D5D5D5; font-family: 'Varela Round', sans-serif; background-color:rgba(240, 250, 255, 0.2);">
                <div class="card-header">
                 <b>{{about_us.name}} </b>  <br>
                 <i class="fas fa-phone-alt" aria-hidden="true" style="color: white;"></i>  {{about_us.phone_number}} <br>
@@ -180,7 +180,7 @@
           </div>
       </div>
   
-      <div class="col-lg-3 col-sm-3 col-md-3" style="padding:20px; color:white">
+      <div class="col-lg-4 col-sm-4 col-md-4" style="padding:20px; color:white">
           <h5><b>Quick Links</b></h5><br>
           <a style="text-decoration:none;color: white;" href="{{about_us.social_facebook}}"> <i class="fab fa-facebook" aria-hidden="true" style="font-size: 35px;"></i></a>  &nbsp;
           <a style="text-decoration:none;color: white;" href="{{about_us.social_twitter}}"> <i class="fab fa-twitter" aria-hidden="true" style="font-size: 35px;"></i></a>&nbsp;
@@ -188,6 +188,21 @@
           <a style="text-decoration:none;color: white;" href="{{about_us.social_instagram}}"> <i class="fab fa-instagram" aria-hidden="true" style="font-size: 35px;"></i></a>  &nbsp;
           <br><br>
           <p><i class="fa fa-copyright" aria-hidden="true" style="color: white;font-size: 25px;"></i> Copyright <script>document.write(new Date().getFullYear())</script> - All rights reserved</p>
+          <p></p>
+      </div>
+
+      <div class="col-lg-3 col-sm-3 col-md-3" style="padding:10px; color:white">
+        <br>
+        <div class="">
+         <div class="card shadow-lg p-2 mb-2  rounded" style="width:320px; border: 1px solid#D5D5D5; font-family: 'Varela Round', sans-serif; background-color:rgba(240, 250, 255, 0.2);">
+             <div class="card-header">
+              <h6><b>Developed By:</b></h6>
+              <b>Gaurav Kumar </b>  <br>
+              <i class="fas fa-phone-alt" aria-hidden="true" style="color: white;"></i> +916204179716 <br>
+              <i class="fa fa-envelope" aria-hidden="true" style="color: white;"></i> gaurav.official133@gmail.com
+             </div>
+          </div>
+        </div>
       </div>
 
     </div>

@@ -11,7 +11,7 @@ class Category(models.Model):
         return self.category
 
 class Image(models.Model):
-    category = models.ForeignKey(Category,on_delete = models.CASCADE)
+    category = models.ForeignKey(Category,on_delete = models.CASCADE,blank=True)
     image = models.ImageField(upload_to='images/')
     cropping = ImageRatioField('image', '430x360')
     img_caption = models.CharField(max_length = 100)
@@ -23,11 +23,11 @@ class Image(models.Model):
 class About(models.Model):
     heading = models.CharField(max_length = 100)
     about_thumbnail = models.ImageField(upload_to='images/',blank=True)
-    short_description = models.TextField()
+    short_description = models.TextField(blank=True)
     description = FroalaField()
     name = models.CharField(max_length = 100,blank=True,null=True)
     location = models.CharField(max_length = 100,blank=True,null=True)
-    phone_number = models.CharField(max_length = 10,blank=True,null=True)
+    phone_number = models.CharField(max_length = 12,blank=True,null=True)
     email_id = models.EmailField(max_length = 100,blank=True,null=True)
     social_facebook = models.URLField(max_length = 500,blank=True,null=True)
     social_twitter = models.URLField(max_length = 500,blank=True,null=True)
