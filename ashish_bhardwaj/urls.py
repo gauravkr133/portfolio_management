@@ -20,6 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from froala_editor import views
 from index import views as index_views
+
+admin.site.site_header  = 'Ashish Bhardwaj'                  
+admin.site.index_title  = 'Ashish Bhardwaj'                 
+admin.site.site_title   = 'Ashish Bhardwaj Admin' 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('froala_editor/',include('froala_editor.urls')),
@@ -31,6 +36,4 @@ urlpatterns = [
     path('contact_us/',index_views.contact_us,name="contact_us"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = 'Ashish Bhardwaj'                  
-admin.site.index_title = 'Ashish Bhardwaj'                 
-admin.site.site_title = 'Ashish Bhardwaj Admin' 
+
