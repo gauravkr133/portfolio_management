@@ -27,7 +27,7 @@ class About(models.Model):
     description = FroalaField()
     name = models.CharField(max_length = 100,blank=True,null=True)
     location = models.CharField(max_length = 100,blank=True,null=True)
-    phone_number = models.CharField(max_length = 15,blank=True,null=True)
+    phone_number = models.CharField(max_length =15,blank=True,null=True)
     email_id = models.EmailField(max_length = 100,blank=True,null=True)
     social_facebook = models.URLField(max_length = 500,blank=True,null=True)
     social_twitter = models.URLField(max_length = 500,blank=True,null=True)
