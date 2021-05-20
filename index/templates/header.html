@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway|Varela+Round" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body style="font-family: 'Varela Round', sans-serif;">
   <style>
@@ -156,6 +157,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 <script src="https://kit.fontawesome.com/6a0ca021ad.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  $('document').ready(function(){
+    AOS.init({
+      once: true
+    });
+  });
+</script>
 <footer>
   {% for about_us in about_us%}
   <div class="container-fluid" style="bottom:0;margin-bottom: 0px;margin-top:60px; background-color: #2887C1; font-family: 'Varela Round', sans-serif;">

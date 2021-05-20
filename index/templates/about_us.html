@@ -5,6 +5,7 @@
 <section>
     {% for about_us in about_us %}
     <div class="container-fluid">
+        <br>
         <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-4"></div>
               <div class="col-sm-4 col-md-4 col-lg-4">
@@ -17,7 +18,7 @@
 
     <div class="container-fluid">
         
-        <div class="row gy-3">
+        <div class="row gy-3" data-aos="fade-up" data-aos-duration="2000">
             <div class="col-sm-10 col-md-10 col-lg-10 p-3">
                 {{about_us.description|safe}}
             </div>
