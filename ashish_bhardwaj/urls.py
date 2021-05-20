@@ -30,3 +30,7 @@ urlpatterns = [
     path('videos/',index_views.videos,name="videos"),
     path('contact_us/',index_views.contact_us,name="contact_us"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = 'Ashish Bhardwaj'                  
+admin.site.index_title = 'Ashish Bhardwaj'                 
+admin.site.site_title = 'Ashish Bhardwaj Admin' 
