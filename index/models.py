@@ -3,6 +3,7 @@ from image_cropping import ImageRatioField
 from froala_editor.fields import FroalaField
 
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length = 100)
     category_thumbnail = models.ImageField(upload_to='images/',blank=True)
     is_active = models.BooleanField(default=True)
@@ -11,6 +12,7 @@ class Category(models.Model):
         return self.category
 
 class Image(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category,on_delete = models.CASCADE,blank=True)
     image = models.ImageField(upload_to='images/')
     cropping = ImageRatioField('image', '430x360')
@@ -21,6 +23,7 @@ class Image(models.Model):
         return self.img_caption
 
 class About(models.Model):
+    id = models.AutoField(primary_key=True)
     heading = models.CharField(max_length = 100)
     about_thumbnail = models.ImageField(upload_to='images/',blank=True)
     short_description = models.TextField(blank=True)
@@ -38,6 +41,7 @@ class About(models.Model):
 
 
 class Journey(models.Model):
+    id = models.AutoField(primary_key=True)
     date        = models.DateField(blank=True,help_text = "Please use the following format: <em>YYYY-MM-DD</em>.")
     heading     = models.CharField(max_length = 100,blank=True)
     description = models.TextField(max_length=500)
@@ -46,6 +50,7 @@ class Journey(models.Model):
         return self.heading
 
 class Video(models.Model):
+    id = models.AutoField(primary_key=True)
     video_caption = models.CharField(max_length = 100)
     video_thumbnail = models.ImageField(upload_to='images/',blank=True)
     video_file = models.FileField(upload_to='videos/',blank=True,null=True)
@@ -55,6 +60,7 @@ class Video(models.Model):
         return self.video_caption
 
 class Contact(models.Model):
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length = 100)
     last_name  = models.CharField(max_length = 100)
     email_id   = models.EmailField(max_length = 100)
