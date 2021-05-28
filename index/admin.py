@@ -18,5 +18,6 @@ class VideoModelAdmin(admin.ModelAdmin):
 admin.site.register(Category,CategoryModelAdmin) 
 admin.site.register(Image, ImageModelAdmin)
 admin.site.register(About)
+admin.site.register(Journey)
 admin.site.register(Video,VideoModelAdmin)
 admin.site.register(Contact)

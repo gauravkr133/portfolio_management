@@ -7,7 +7,7 @@ about_us = About.objects.all()
 context['about_us'] = about_us
 
 def index(request):
-    slider_img = Image.objects.filter(category=1)
+    slider_img = Image.objects.filter(category=1).filter(is_active=True)
     context['slider_img'] = slider_img
 
     about_us = About.objects.all()
@@ -16,8 +16,11 @@ def index(request):
     gallery_data = Category.objects.exclude(category="Slider").filter(is_active=True)
     context['gallery_data'] = gallery_data
 
-    video_data = Video.objects.all()[0:4]
+    video_data = Video.objects.all().filter(is_active=True)[0:4]
     context['video_data'] = video_data
+
+    journey_data = Journey.objects.all().filter(is_active=True)
+    context['journey_data'] = journey_data
 
     return render(request,"index.html",context)
 
@@ -36,7 +39,7 @@ def gallery_detail(request,category):
     return render(request,"gallery_detail.html",context)
 
 def videos(request):
-    video_data = Video.objects.all()
+    video_data = Video.objects.all().filter(is_active=True)
     context['video_data'] = video_data
     return render(request,"videos.html",context)
 

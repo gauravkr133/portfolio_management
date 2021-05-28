@@ -36,11 +36,21 @@ class About(models.Model):
     def __str__(self):
         return self.heading
 
+
+class Journey(models.Model):
+    date        = models.DateField(blank=True,help_text = "Please use the following format: <em>YYYY-MM-DD</em>.")
+    heading     = models.CharField(max_length = 100,blank=True)
+    description = models.TextField(max_length=500)
+    is_active = models.BooleanField(default=True)
+    def __str__(self):
+        return self.heading
+
 class Video(models.Model):
     video_caption = models.CharField(max_length = 100)
     video_thumbnail = models.ImageField(upload_to='images/',blank=True)
     video_file = models.FileField(upload_to='videos/',blank=True,null=True)
     video_code = models.CharField(max_length = 100,blank=True,null=True)
+    is_active = models.BooleanField(default=True)
     def __str__(self):
         return self.video_caption
 
