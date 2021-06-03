@@ -15,9 +15,17 @@ class ImageModelAdmin(ImageCroppingMixin, admin.ModelAdmin):
 class VideoModelAdmin(admin.ModelAdmin):
     list_display = ('video_caption','video_file')
 
+class PressModelAdmin(admin.ModelAdmin):
+    list_display = ('type','video_caption','press_heading','created_at')
+
+class EventModelAdmin(admin.ModelAdmin):
+    list_display = ('event_heading','event_venue','event_date')
+
 admin.site.register(Category,CategoryModelAdmin) 
 admin.site.register(Image, ImageModelAdmin)
 admin.site.register(About)
 admin.site.register(Journey)
 admin.site.register(Video,VideoModelAdmin)
+admin.site.register(Press,PressModelAdmin)
+admin.site.register(Event,EventModelAdmin)
 admin.site.register(Contact)

@@ -22,6 +22,8 @@ def index(request):
     journey_data = Journey.objects.all().filter(is_active=True)
     context['journey_data'] = journey_data
 
+    event_data = Event.objects.filter(is_active=True)
+    context['event_data'] = event_data
     return render(request,"index.html",context)
 
 def about_us(request):
@@ -42,6 +44,18 @@ def videos(request):
     video_data = Video.objects.all().filter(is_active=True)
     context['video_data'] = video_data
     return render(request,"videos.html",context)
+
+def press(request,type):
+    type = type.lower()
+    press_data = Press.objects.filter(type=type,is_active=True)
+    context['press_data'] = press_data
+    return render(request,"press.html",context)
+
+def press_detail(request,id):
+    press_data_single = Press.objects.filter(id=id)
+    print(press_data_single)
+    context['press_data_single'] = press_data_single
+    return render(request,"press_detail.html",context) 
 
 def contact_us(request):
     context['msg'] = ""

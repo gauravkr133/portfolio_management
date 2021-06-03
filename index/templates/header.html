@@ -77,6 +77,21 @@
       color: #f93;
     }
 
+    .nav-link-hover:hover{
+      color: #f93 !important;
+    }
+
+    .dropdown-item{
+      background: linear-gradient(to right, #f93 50%, white 50%);
+      background-size: 200% 100%;
+      background-position: right bottom;
+      transition: all .5s ease-out;
+    }
+
+    .dropdown-item:hover{
+      background-position: left bottom;
+    }
+
   </style>
   
     <header class="text-white fixed-top">
@@ -91,6 +106,8 @@
             <a style="text-decoration:none;color: white;" href="{{about_us.social_youtube}}"> <i class="fab fa-youtube" aria-hidden="true" style="font-size: 25px;"></i></a>  
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a style="text-decoration:none;color: white;" href="{{about_us.social_instagram}}"> <i class="fab fa-instagram" aria-hidden="true" style="font-size: 25px;"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;" href="{{about_us.wikipedia}}"> <i class="fab fa-wikipedia-w" aria-hidden="true" style="font-size: 25px;"></i></a>
           </div>
         </div>
         {% endfor %}
@@ -111,22 +128,35 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto" style="font-size: 20px;">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'index'%}">Home</a>
+                <a class="nav-link nav-link-hover" href="{% url 'index'%}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'about_us'%}">About</a>
-              </li>
-  
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                <a class="nav-link nav-link-hover" href="{% url 'about_us'%}">About</a>
               </li>
   
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'videos' %}">Videos</a>
+                <a class="nav-link nav-link-hover" href="{% url 'gallery' %}">Gallery</a>
               </li>
   
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+                <a class="nav-link nav-link-hover" href="{% url 'videos' %}">Videos</a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Press
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'press' "News" %}">News</a>
+                  <a class="dropdown-item" href="{% url 'press' "Editorial" %}">Editorial</a>
+                  <a class="dropdown-item" href="{% url 'press' "Interviews" %}">Interviews</a>
+                  <a class="dropdown-item" href="{% url 'press' "Critics" %}">Critics</a>
+                  <a class="dropdown-item" href="{% url 'press' "Press releases" %}">Press releases</a>
+                </div>
+              </li>
+  
+              <li class="nav-item">
+                <a class="nav-link nav-link-hover" href="{% url 'contact_us' %}">Contact Us</a>
               </li>
   
             </ul>

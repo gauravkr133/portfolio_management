@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from froala_editor import views
 from index import views as index_views
+import index
 
 admin.site.site_header  = 'Ashish Bhardwaj'                  
 admin.site.index_title  = 'Ashish Bhardwaj'                 
@@ -33,6 +34,8 @@ urlpatterns = [
     path('gallery/',index_views.gallery,name="gallery"),
     path('gallery_detail/<str:category>',index_views.gallery_detail,name="gallery_detail"),
     path('videos/',index_views.videos,name="videos"),
+    path('press/<str:type>',index_views.press,name="press"),
+    path('press_detail/<int:id>',index_views.press_detail,name="press_detail"),
     path('contact_us/',index_views.contact_us,name="contact_us"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -545,6 +545,46 @@
 </section>
 
 <section>
+<style>
+
+</style>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <center><h4 class="font-weight-bold text-center" style="text-align:center;"> Upcoming Events </h4></center>
+        </div>
+      <div class="col-sm-4 col-md-4 col-lg-4"></div>
+    </div>
+    <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
+  </div>
+
+  <div class="container-fluid" data-aos="fade-up" data-aos-duration="2000">
+    <div class="row mt-4 p-3">
+    
+      {% for event_data in event_data %}
+          <div class="card border-primary col-sm-6 col-md-4 mb-3 ml-2">
+            <img src="{{event_data.event_poster.url}}" height="350px" width="100%" class="card-img-top" alt="{{event_data.event_heading}}">
+            <div class="card-body">
+              <h5 class="card-title">{{event_data.event_heading}}</h5>
+              <p class="card-text">Event on <i class="far fa-clock"></i> {{event_data.event_date|date:"d M,Y"}}</p>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <p class="text-center" style="font-size: 30px;">No Upcoming Events</p>
+          </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+</section>
+
+
+<section>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-4"></div>
