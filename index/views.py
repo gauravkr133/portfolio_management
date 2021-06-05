@@ -7,15 +7,18 @@ about_us = About.objects.all()
 context['about_us'] = about_us
 
 def index(request):
-    slider_img = Image.objects.filter(category=1).filter(is_active=True)
+    slider_img = Image.objects.filter(category__category__contains="Slider").filter(is_active=True)
     context['slider_img'] = slider_img
 
     about_us = About.objects.all()
     context['about_us'] = about_us
 
-    gallery_data = Category.objects.exclude(category="Slider").filter(is_active=True)
-    context['gallery_data'] = gallery_data
+    category_data = Category.objects.exclude(category="Slider").filter(is_active=True)
+    context['category_data'] = category_data
 
+    img_data = Image.objects.all().filter(is_active=True)
+    context['img_data'] = img_data
+    
     video_data = Video.objects.all().filter(is_active=True)[0:4]
     context['video_data'] = video_data
 

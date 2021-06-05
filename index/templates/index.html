@@ -386,99 +386,8 @@
 </section>-->
 <br><br>
 
-<section class="portfolio" id="portfolio">
-  <style>
-    .hovereffects{
-       width: 100%;
-       height: 100%;
-       overflow: hidden;
-       position: relative;
-       text-align: center;
-       cursor: default;
-       margin-bottom: 10px;
-
-    }
-    
-    .hovereffects .overlay{
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      background-color: rgba(0,0,0,0.5);
-      -webkit-transition: all 0.4s ease-in-out;
-      transition: all 0.4s ease-in-out
-    }
-    
-    .hovereffects img{
-      display: block;
-      position: relative;
-      -webkit-transition: all .4s linear;
-      transition: all .4s linear;
-    }
-    
-    .hovereffects h2{
-      text-transform: uppercase;
-      color: #fff;
-      text-align: center;
-      position: relative;
-      font-size: 17px;
-      background: rgba(0,0,0,0.6);
-      -webkit-transform: translateY(-100px);
-      -ms-transform: translateY(-100px);
-      transform: translateY(-100px);
-      -webkit-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
-      padding: 10px;
-    }
-    
-    .hovereffects a.info{
-      text-decoration: none;
-      display: inline-block;
-      text-transform: uppercase;
-      color: #fff;
-      border:1px solid #fff;
-      background-color: transparent;
-      opacity: 0;
-      filter: alpha(opacity=0);
-      -webkit-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
-      margin: 50px 0 0;
-      padding: 7px 14px;
-    }
-    
-    .hovereffects a.info:hover{
-      box-shadow: 0 0 5px #fff;
-    
-    }
-    
-    .hovereffects:hover img{
-      -ms-transform: scale(1.2);
-      -webkit-transform: scale(1.2);
-      transform: scale(1.2);
-    }
-    
-    .hovereffects:hover .overlay{
-      opacity: 1;
-      filter: alpha(opacity=100);
-    }
-    
-    .hovereffects:hover h2, .hovereffects:hover a.info{
-      opacity: 1;
-      filter: alpha(opacity=100);
-      -ms-transform: translateY(0);
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-    }
-    
-    .hovereffects:hover a.info{
-      -webkit-transition-delay: .2s;
-      transition-delay: .2s;
-    }
-
-  </style>
+<section>
+  
 
 	<div class="container-fluid">
     <div class="row">
@@ -491,21 +400,36 @@
     <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
 	</div>
 
-  <div class="container-fluid" data-aos="fade-up" data-aos-duration="2000">
-    <div class="row">
-      {% for gallery_data in gallery_data %}
-      <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="hovereffects">
-          <img src="{{gallery_data.category_thumbnail.url}}" height="300px" width="100%" alt="images">
-          <div class="overlay">
-            <h2>{{gallery_data.category}}</h2>
-            <a class="info" href="{% url 'gallery_detail' gallery_data.category %}">more photos</a>
-          </div>
-        </div>
+  <div class="container-fluid">
+    <style>
+      .active-border{
+        border-style: double none double none;
+        border-color: black;
+      }
+    </style>
+    <div class="row text-center" data-aos="fade-up" data-aos-duration="2000">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <span style="font-size: 30px;color:#ff9933;cursor:default;" class="filter-button active active-border" data-filter="all">All</span>
+        {% for category_data in category_data%}
+          <span style="font-size: 30px; color:#ff9933;cursor:default;" class="ml-2 p-2 filter-button" data-filter="{{ category_data.category|cut:" " }}">{{category_data.category}}</span>
+        {% endfor %}
       </div>
-      {% endfor %}
+    </div><br>
+
+    <div class="row text-center p-3" data-aos="fade-up" data-aos-duration="2000">
+
+        {% for img_data in img_data %}
+          <div class="mt-2 ml-1 col-xs-12 col-sm-6 col-md-3 filter {{img_data.category|cut:" "}}">                  
+            <a href="{{img_data.image.url}}" data-fancybox="gallery">                  
+              <img height="300px" width="100%" src="{{img_data.image.url}}" alt="{{img_data.img_caption}}">                  
+            </a>             
+          </div>
+        {% endfor %}
+        
     </div>
+
   </div>
+
 </section>
 <br><br>
 
