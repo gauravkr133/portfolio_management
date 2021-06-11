@@ -153,6 +153,7 @@ if DEBUG == True:
     MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
 else:
+    #config for production
     STATIC_URL  =  '/static/'
     STATIC_ROOT =  str(os.getenv('STATIC_ROOT'))
     MEDIA_ROOT  =  str(os.getenv('MEDIA_ROOT'))
