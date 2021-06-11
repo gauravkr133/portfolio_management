@@ -148,12 +148,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+if DEBUG == True:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
+else:
+    #config for production
+    STATIC_URL  =  '/static/'
+    STATIC_ROOT =  str(os.getenv('STATIC_ROOT'))
+    MEDIA_ROOT  =  str(os.getenv('MEDIA_ROOT'))
+    MEDIA_URL   =  '/media/'
 
 X_FRAME_OPTIONS = 'ALLOWALL'
 
