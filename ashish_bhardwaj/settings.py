@@ -14,16 +14,17 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+from dotenv import load_dotenv
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5v$+@_-w(lasom&%l#*_2=n2_qutob9bgc1&=u-s*_3!nqll1n'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['204.48.25.55','127.0.0.1']
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'froala_editor',
+    'blog',
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
@@ -90,21 +92,23 @@ WSGI_APPLICATION = 'ashish_bhardwaj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-"""DATABASES = {
+if DEBUG == True:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}"""
-
-DATABASES = {
+    }
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': '/etc/mysql/my.cnf',
         },
     }
-}
+    }
+
 
 
 # Password validation

@@ -22,6 +22,8 @@ from froala_editor import views
 from index import views as index_views
 import index
 
+from blog import views as blog_views
+
 admin.site.site_header  = 'Ashish Bhardwaj'                  
 admin.site.index_title  = 'Ashish Bhardwaj'                 
 admin.site.site_title   = 'Ashish Bhardwaj Admin' 
@@ -37,6 +39,10 @@ urlpatterns = [
     path('press/<str:type>',index_views.press,name="press"),
     path('press_detail/<int:id>',index_views.press_detail,name="press_detail"),
     path('contact_us/',index_views.contact_us,name="contact_us"),
+    path('blog/',blog_views.blog,name="blog"),
+    path('blog/<slug:slug>',blog_views.blog_detail,name="blog_detail"),
+    path('category/<str:category_name>',blog_views.category_detail,name="category_detail",),
+    path('category/',blog_views.category_detail,name="category_detail",)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -1,6 +1,7 @@
 import random
 from django.shortcuts import render
 from .models import *
+from blog.models import *
 
 context = {}
 about_us = About.objects.all()
@@ -27,6 +28,11 @@ def index(request):
 
     event_data = Event.objects.filter(is_active=True)
     context['event_data'] = event_data
+
+    blog_data = Blogpost.objects.filter(is_active=True).order_by('-post_id')[:3]
+
+    context['blog_data'] = blog_data
+
     return render(request,"index.html",context)
 
 def about_us(request):
@@ -56,7 +62,6 @@ def press(request,type):
 
 def press_detail(request,id):
     press_data_single = Press.objects.filter(id=id)
-    print(press_data_single)
     context['press_data_single'] = press_data_single
     return render(request,"press_detail.html",context) 
 

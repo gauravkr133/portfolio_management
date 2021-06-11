@@ -1,0 +1,96 @@
+{% extends "header.html" %}
+
+{% block body%}
+
+<section>
+    <br><br><br><br><br><br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-6 col-sm-6">
+                <div class="row">
+
+                    {% for blog_data in blog_data %}
+                    <div class="col-md-12 col-lg-6 col-sm-12">
+
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" height="325px" src="{{blog_data.thumbnail.url}}" alt="{{blog_data.post_title}}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <small class="text-muted">{{blog_data.pub_date | date:"d M | Y"}}</small>
+                                    {% for post_category in blog_data.post_category.all %}
+                                    <a class="card-link text-muted float-right" href="{% url 'category_detail' post_category %}">{{post_category}} &nbsp;</a>
+                                    {% endfor %}
+                                </p>
+                                <h2 class="card-title">{{blog_data.post_title}}</h2>
+                                <p class="card-text">
+                                {{blog_data.post_body | slice:":100" | safe}}
+                                <a class="card-link" href="{% url 'blog_detail' blog_data.post_slug %}">Read More >></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center" style="font-size: 30px;">No blogs available</p>
+                    </div>
+                    {% endfor %} 
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        
+                        <div class="card p-2">
+                            <h4 class="card-title">Recent posts</h4>
+
+                            {% for latest_blog_data in latest_blog_data %}
+                            <div class="card" style="border:none;">
+                                <div class="row mt-1 no-gutters">
+                                  <div class="col-md-3">
+                                      <a href="{% url 'blog_detail' latest_blog_data.post_slug %}">
+                                        <img height="100px" width="100%" src="{{latest_blog_data.thumbnail.url}}" alt="{{latest_blog_data.post_title}}">
+                                      </a>
+                                  </div>
+                                  <div class="col-md-9">
+                                    <div class="card-body">
+                                        <a class="card-link text-dark" href="{% url 'blog_detail' latest_blog_data.post_slug %}">
+                                            <h5 class="card-title">{{latest_blog_data.post_title}}</h5>
+                                        </a>
+                                      <p class="card-text"><small class="text-muted">{{latest_blog_data.pub_date | date:"d M | Y"}}</small></p>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            {% endfor %}                            
+
+                        </div>
+
+                        <div class="card p-2 mt-4">
+                            <h4 class="card-title">Categories</h4>
+                            <ul class="list-group list-group-flush">
+                                {% for category_data in category_data %}
+                                    <li class="list-group-item hoverable">
+                                        <a href="{% url 'category_detail' category_data.post_category__blog_category %}" class="card-link text-dark">{{category_data.post_category__blog_category}}</a>
+                                        <small class="float-right">{{category_data.category_count}}</small> 
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+                
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

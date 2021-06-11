@@ -340,10 +340,9 @@
     </div>
   </div>
 </section>
-<!--
-  <section>
-  <div class="container-fluid">
-
+<br>
+<section>
+  <div class="container-fluid" data-aos="fade-in" data-aos-duration="2000">
     <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-4"></div>
       <div class="col-sm-4 col-md-4 col-lg-4">
@@ -354,36 +353,37 @@
     <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
   </div>
 
-  <div class="container-fluid">
-    <div class="row pb-5 mb-4">
-
-      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-
-        <div class="card rounded shadow-sm border-0">
-          <img src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="" class="card-img-top img-fluid d-block mx-auto mb-3">
-          <div class="card-body p-2">
-            <h4>This is body text</h4>
-            <p>This is the testing blog am writting here</p>
+  <div class="container-fluid" data-aos="fade-in" data-aos-duration="2000">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="card-deck">
+          {% for blog_data in blog_data %}
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img class="card-img-top" height="325px" src="{{blog_data.thumbnail.url}}" alt="{{blog_data.post_title}}">
+              <div class="card-body">
+                <h2 class="card-title">{{blog_data.post_title}}</h2>
+                <p class="card-text">
+                  {{blog_data.post_body | slice:":100" | safe}}
+                  <a class="card-link" href="{% url 'blog_detail' blog_data.post_slug %}">Read More >></a>
+                </p>
+              </div>
+            </div>
+          </div> 
+          {% empty %}
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <p class="text-center" style="font-size: 30px;">No blogs available</p>
           </div>
+          {% endfor %}  
         </div>
       </div>
-
-      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
- 
-        <div class="card rounded shadow-sm border-0">
-          <img src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="" class="card-img-top img-fluid d-block mx-auto mb-3">
-          <div class="card-body p-2">
-            <h4>This is body text</h4>
-            <p>This is the testing blog am writting here</p>
-          </div>
-        </div>
-      </div>
-
  
 
     </div>
   </div>
-</section>-->
+
+
+</section>
 <br><br>
 
 <section>
