@@ -24,7 +24,7 @@ load_dotenv()
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['204.48.25.55','127.0.0.1']
 
@@ -39,16 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'index',
-    'easy_thumbnails',
-    'image_cropping',
     'froala_editor',
     'blog',
 ]
 
-from easy_thumbnails.conf import Settings as thumbnail_settings
-THUMBNAIL_PROCESSORS = (
-    'image_cropping.thumbnail_processors.crop_corners',
-) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
 
 FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier' ,'code_view', 'colors', 'draggable', 'emoticons',
         'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image_manager', 'image', 'inline_style',
@@ -147,17 +142,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-if DEBUG == True:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-    MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = '/media/'
-else:
-    #config for production
-    STATIC_URL  =  '/static/'
-    STATIC_ROOT =  str(os.getenv('STATIC_ROOT'))
-    MEDIA_ROOT  =  str(os.getenv('MEDIA_ROOT'))
-    MEDIA_URL   =  '/media/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 
 X_FRAME_OPTIONS = 'ALLOWALL'
