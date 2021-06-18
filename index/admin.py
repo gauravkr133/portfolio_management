@@ -8,7 +8,7 @@ class CategoryModelAdmin(admin.ModelAdmin):
     list_display_links = ('category',)
 
 class ImageModelAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    list_display = ('category','image','img_caption','is_active')
+    list_display = ('id','category','image','img_caption','is_active')
     list_editable = ('category','is_active','img_caption')
     list_display_links = ['image',]
 
@@ -20,6 +20,7 @@ class PressModelAdmin(admin.ModelAdmin):
 
 class EventModelAdmin(admin.ModelAdmin):
     list_display = ('event_heading','event_venue','event_date')
+
 
 admin.site.register(Category,CategoryModelAdmin) 
 admin.site.register(Image, ImageModelAdmin)
