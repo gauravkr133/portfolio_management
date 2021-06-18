@@ -28,7 +28,7 @@
                                 </p>
                                 <h1 class="card-title">{{blog_detail.post_title}}</h1>
                                 <p class="card-text">
-                                {{blog_detail.post_body | safe}}
+                                {{blog_detail.post_body | slice:":-229" | safe}}
                                 </p>
                             </div>
 

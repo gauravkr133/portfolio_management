@@ -20,7 +20,7 @@
         
         <div class="row gy-3" data-aos="fade-up" data-aos-duration="2000">
             <div class="col-sm-10 col-md-10 col-lg-10 p-3">
-                {{about_us.description|safe}}
+                {{about_us.description| slice:":-229" | safe}}
             </div>
         </div>
     </div>

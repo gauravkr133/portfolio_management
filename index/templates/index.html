@@ -365,8 +365,9 @@
                 <h2 class="card-title">{{blog_data.post_title}}</h2>
                 <p class="card-text">
                   {{blog_data.post_body | slice:":100" | safe}}
-                  <a class="card-link" href="{% url 'blog_detail' blog_data.post_slug %}">Read More >></a>
+    
                 </p>
+				<a class="card-link" href="blog_detail/{{blog_data.post_slug}}">Read More>></a>
               </div>
             </div>
           </div> 
