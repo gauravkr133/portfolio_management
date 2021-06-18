@@ -45,7 +45,11 @@
         {% for about in about_us %}
         <div class="row gy-3">
             <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-right" data-aos-duration="2000">
-                <img src="{{about.about_thumbnail.url}}" class="img-fluid rounded border border-dark" alt="Responsive image">
+                {%if about.about_thumbnail%}
+                <img src="{{about.about_thumbnail.url}}" class="img-fluid rounded border border-dark" alt="Ashish Bhardwaj">
+                {%else%}
+                <img src="{{ STATIC_URL }}images/avatar.png" class="img-fluid rounded border border-dark" alt="Ashish Bhardwaj">
+                {%endif%}
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-left" data-aos-duration="2000">
                 <h4 class="font-weight-bold" style="color: #f93;">{{about.heading}}</h4>

@@ -1,5 +1,5 @@
 import random
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from blog.models import *
 
@@ -44,9 +44,12 @@ def gallery(request):
     return render(request,"gallery.html",context)
 
 def gallery_detail(request,category):
-    img_category_id = Category.objects.filter(category=category).first().id
-    category_filter_img = Image.objects.filter(category=img_category_id,is_active=True)
-    context['category_filter_img'] = category_filter_img
+    try:
+        img_category_id = Category.objects.filter(category=category).first().id
+        category_filter_img = Image.objects.filter(category=img_category_id,is_active=True)
+        context['category_filter_img'] = category_filter_img
+    except:
+        return redirect('gallery')
     return render(request,"gallery_detail.html",context)
 
 def videos(request):
@@ -56,13 +59,19 @@ def videos(request):
 
 def press(request,type):
     type = type.lower()
-    press_data = Press.objects.filter(type=type,is_active=True)
-    context['press_data'] = press_data
+    try:
+        press_data = Press.objects.filter(type=type,is_active=True)
+        context['press_data'] = press_data
+    except:
+        return redirect('index')
     return render(request,"press.html",context)
 
 def press_detail(request,id):
-    press_data_single = Press.objects.filter(id=id)
-    context['press_data_single'] = press_data_single
+    try:
+        press_data_single = Press.objects.filter(id=id)
+        context['press_data_single'] = press_data_single
+    except:
+        return redirect('index')
     return render(request,"press_detail.html",context) 
 
 def contact_us(request):
@@ -84,3 +93,15 @@ def contact_us(request):
             context['msg'] = "Please fill out all the details"
             context['msg_type'] = "danger"
     return render(request,"contact_us.html",context)
+
+def view_400(request,exception):
+    return render(request,"400.html")
+
+def view_403(request,exception):
+    return render(request,"403.html")
+
+def view_404(request,exception):
+    return render(request,"404.html")
+
+def view_500(request):
+    return render(request,"500.html")

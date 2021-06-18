@@ -28,6 +28,11 @@ admin.site.site_header  = 'Ashish Bhardwaj'
 admin.site.index_title  = 'Ashish Bhardwaj'                 
 admin.site.site_title   = 'Ashish Bhardwaj Admin' 
 
+handler400 = 'index.views.view_400'
+handler403 = 'index.views.view_403'
+handler404 = 'index.views.view_404'
+handler500 = 'index.views.view_500'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('froala_editor/',include('froala_editor.urls')),
