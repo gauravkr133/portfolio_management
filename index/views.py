@@ -73,8 +73,11 @@ def videos(request):
     return render(request,"videos.html",context)
 
 def event_details(request,event_heading,event_id):
-    event_data = Event.objects.filter(id=event_id,event_heading=event_heading)
-    context['event_data'] = event_data
+    try:
+        event_data = Event.objects.filter(id=event_id,event_heading=event_heading)
+        context['event_data'] = event_data
+    except:
+        return redirect('index')
     return render(request,"event_details.html",context)
 
 def press(request,type):
