@@ -99,7 +99,7 @@
       <div class="container-fluid">
         {% for about_us in about_us%}
         <div class="row" style="background-color:#f93;">
-          <div class="col-lg-12 col-sm-12 col-md-12 p-3 text-center">
+          <div class="col-lg-12 col-sm-12 col-md-12 text-center">
             <a style="text-decoration:none;color: white;" href="{{about_us.social_facebook}}"> <i class="fab fa-facebook" aria-hidden="true" style="font-size: 25px;"></i></a>  
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a style="text-decoration:none;color: white;" href="{{about_us.social_twitter}}"> <i class="fab fa-twitter" aria-hidden="true" style="font-size: 25px;"></i></a>
@@ -114,80 +114,92 @@
           </div>
         </div>
         {% endfor %}
-      </div>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" id="brand" href="{% url 'index' %}">
-              <img class="rounded" src="{% static 'images/Ashish-bhardwaj-Logo-png.png' %}"/><br>
-              Nation First, Self Last
-            </a>
-          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="icon-bar top-bar"></span>
-              <span class="icon-bar middle-bar"></span>
-              <span class="icon-bar bottom-bar"></span>
-              <span class="sr-only">Toggle navigation</span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto" style="font-size: 20px;">
-              <li class="nav-item">
-                <a class="nav-link nav-link-hover" href="{% url 'index'%}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link nav-link-hover" href="{% url 'about_us'%}">About</a>
-              </li>
-  
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Gallery
-                </a>
+        <div class="row bg-light">
+          <div class="col-sm-12 col-md-12 col-lg-12">
 
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  {% for category_data in category_data%}
 
-                  {% if category_data.is_dropdown %}
-                  <a class="dropdown-item" href="{% url 'gallery_detail' category_data.category %}">{{category_data.category}}</a>
-                  {% endif %}
-                  {%empty%}
-                  <a class="dropdown-item" href="{% url 'gallery' %}">gallery</a>
-                  {% endfor %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                  <a class="navbar-brand" id="brand" href="{% url 'index' %}">
+                    <img class="rounded" src="{% static 'images/Ashish-bhardwaj-Logo-png.png' %}"/><br>
+                    Nation First, Self Last
+                  </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto" style="font-size: 20px;">
+                    <li class="nav-item">
+                      <a class="nav-link nav-link-hover" href="{% url 'index'%}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-link-hover" href="{% url 'about_us'%}">About</a>
+                    </li>
+        
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Gallery
+                      </a>
+      
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% for category_data in category_data%}
+      
+                        {% if category_data.is_dropdown %}
+                        <a class="dropdown-item" href="{% url 'gallery_detail' category_data.category %}">{{category_data.category}}</a>
+                        {% endif %}
+                        {%empty%}
+                        <a class="dropdown-item" href="{% url 'gallery' %}">gallery</a>
+                        {% endfor %}
+                      </div>
+      
+                    </li>
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-link-hover" href="{% url 'videos' %}">Videos</a>
+                    </li>
+      
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Press
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'press' "News" %}">News</a>
+                        <a class="dropdown-item" href="{% url 'press' "Debate" %}">Debate</a>
+                        <a class="dropdown-item" href="{% url 'press' "Interviews" %}">Interviews</a>
+                        <a class="dropdown-item" href="{% url 'press' "Press releases" %}">Press releases</a>
+                      </div>              
+                    </li>
+      
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My views
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
+                      </div>
+                    </li>
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-link-hover" href="{% url 'contact_us' %}">Contact Us</a>
+                    </li>
+        
+                  </ul>
                 </div>
+              </div>
+            </nav>
 
-              </li>
-  
-              <li class="nav-item">
-                <a class="nav-link nav-link-hover" href="{% url 'videos' %}">Videos</a>
-              </li>
 
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Press
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'press' "News" %}">News</a>
-                  <a class="dropdown-item" href="{% url 'press' "Debate" %}">Debate</a>
-                  <a class="dropdown-item" href="{% url 'press' "Interviews" %}">Interviews</a>
-                  <a class="dropdown-item" href="{% url 'press' "Press releases" %}">Press releases</a>
-                </div>              
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  My views
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
-                </div>
-              </li>
-  
-              <li class="nav-item">
-                <a class="nav-link nav-link-hover" href="{% url 'contact_us' %}">Contact Us</a>
-              </li>
-  
-            </ul>
           </div>
         </div>
-      </nav>
+
+
+      </div>
+
+      
 
     </header>
 {% block body %}
