@@ -1,0 +1,117 @@
+{% extends "header.html" %}
+
+{% block body%}
+
+<section>
+    <br><br><br><br><br><br><br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <center><h4 class="font-weight-bold text-center" style="text-align:center;">Get Involve</h4></center>
+            </div>
+          <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        </div>
+        <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1 col=md-1 col-lg-1"></div>
+            <div class="col-sm-10 col=md-10 col-lg-10">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12" id="alertBox"></div>
+                </div>
+
+                <form id="get_involve" method="POST">
+                    {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Name">First Name:</label>
+                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="Name">Last Name:</label>
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label for="Email">Select Event:</label>
+                        <select class="form-control" id="event" name="event">
+                            <option>Select a event</option>
+                            {% for event_data in event_data %}
+                            <option value={{event_data.id}}>{{event_data.event_heading}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="Name">Phone Number:</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone no." required>
+                    </div>
+
+                </div>
+                              
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="textarea">Why do you want to join event ?</label>
+                        <textarea style="resize:none;" id="message" name="message" class="form-control" placeholder="Why do you want to join event ?" rows="4" required="required"></textarea>
+                    </div>
+                </div>               
+                
+                <button type="submit" class="btn btn-success">Register</button>
+
+                </form>
+
+                <script>
+                    $(document).ready(function() {
+                        const form_id     = document.getElementById('get_involve');
+                        const alertbox    = document.getElementById('alertBox');
+                        $('#get_involve').on('submit', function(e){
+                            e.preventDefault();
+                            $.ajax({
+                                type:'POST',
+                                url:"{% url 'get_involve' %}",
+                                data:{
+                                    firstname    : $('#firstname').val(),
+                                    lastname     : $('#lastname').val(),
+                                    event_id     : $('#event').val(),
+                                    phone_number : $('#phone').val(),
+                                    about        : $('#message').val(),
+                                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                                    dataType: "json",
+                                },
+                                success:function(response){
+                                    form_id.reset()
+                                    alertbox.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                            You are welcomed to the event!!
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>`
+                                },
+                                error:function(error){
+                                    alertbox.innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        Ups... something went wrong
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>`
+                                },
+                            });
+                        });
+                    });
+                </script>
+
+            </div>
+            <div class="col-sm-1 col=md-1 col-lg-1"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

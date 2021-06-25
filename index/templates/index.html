@@ -62,6 +62,52 @@
     </div>
 </section>
 <br>
+
+<section>
+  
+
+  <div class="container-fluid" data-aos="fade-in" data-aos-duration="2000">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="card-deck">
+
+          <div class="col-md-4">
+            <div class="p-3 card mb-4 box-shadow text-center" style="background-color: #4682b4;">
+              <i style="color: #FFF;font-size:100px;" class="fas fa-hands-helping"></i>
+              <br>
+              <a href="{% url 'volunteer' %}" style="color: #FFF;font-size:25px;text-decoration:none;">Volunteer</a>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="p-3 card mb-4 box-shadow text-center" style="background-color: #4682b4;">
+              <i style="color: #FFF;font-size:100px;" class="fas fa-users"></i>
+              <br>
+              <a href="{% url 'get_involve' %}" style="color: #FFF;font-size:25px;text-decoration:none;">Get Involve</a>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="p-3 card mb-4 box-shadow text-center" style="background-color: #4682b4;">
+              <i style="color: #FFF;font-size:100px;" class="fas fa-donate"></i>
+              <br>
+              <a href="" style="color: #FFF;font-size:25px;text-decoration:none;">Donate now</a>
+            </div>
+          </div>
+
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<br>
+
 <section>
   <style type="text/css">
     .main-timeline {
@@ -344,53 +390,7 @@
     </div>
   </div>
 </section>
-<br>
-<section>
-  <div class="container-fluid" data-aos="fade-in" data-aos-duration="2000">
-    <div class="row">
-      <div class="col-sm-4 col-md-4 col-lg-4"></div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-          <center><h4 class="font-weight-bold text-center" style="text-align:center;">LATEST BLOG</h4></center>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4"></div>
-    </div>
-    <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
-  </div>
-
-  <div class="container-fluid" data-aos="fade-in" data-aos-duration="2000">
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="card-deck">
-          {% for blog_data in blog_data %}
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" height="325px" src="{{blog_data.thumbnail.url}}" alt="{{blog_data.post_title}}">
-              <div class="card-body">
-                <h2 class="card-title">{{blog_data.post_title}}</h2>
-                <p class="card-text">
-                  {{blog_data.post_body | slice:":100" | safe}}
-    
-                </p>
-				<a class="card-link" href="blog_detail/{{blog_data.post_slug}}">Read More>></a>
-              </div>
-            </div>
-          </div> 
-          {% empty %}
-          <div class="col-sm-12 col-md-12 col-lg-12">
-            <p class="text-center" style="font-size: 30px;">No blogs available</p>
-          </div>
-          {% endfor %}  
-        </div>
-      </div>
- 
-
-    </div>
-  </div>
-
-
-</section>
 <br><br>
-
 <section>
   
 
@@ -589,7 +589,8 @@
             <img src="{{event_data.event_poster.url}}" height="350px" width="100%" class="card-img-top" alt="{{event_data.event_heading}}">
             <div class="card-body">
               <h5 class="card-title">{{event_data.event_heading}}</h5>
-              <p class="card-text">Event on <i class="far fa-clock"></i> {{event_data.event_date|date:"d M,Y"}}</p>
+              <p class="card-text">Event on <i class="far fa-clock"></i> {{event_data.event_start_date|date:"d M,Y"}} - {{event_data.event_end_date|date:"d M,Y"}}</p>
+              <a class="cardlink" href="{% url 'get_involve' %}">Join Event</a>&nbsp;&nbsp;&nbsp;<a class="cardlink" href="{% url 'event_details' event_data.event_heading event_data.id %}">Event Details</a>
             </div>
           </div>
           {% empty %}
@@ -603,6 +604,41 @@
 
 
 </section>
+
+<section>
+  
+    {% if initiative_data %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+            <center><h4 class="font-weight-bold text-center" style="text-align:center;"> New Initiatives </h4></center>
+          </div>
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+      </div>
+      <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
+    </div>
+  
+    <div class="container-fluid" data-aos="fade-up" data-aos-duration="2000">
+      <div class="row mt-4 p-3">
+      
+        {% for event_data in initiative_data %}
+            <div class="card border-primary col-sm-6 col-md-4 mb-3 ml-2">
+              <img src="{{event_data.event_poster.url}}" height="350px" width="100%" class="card-img-top" alt="{{event_data.event_heading}}">
+              <div class="card-body">
+                <h5 class="card-title">{{event_data.event_heading}}</h5>
+                <p class="card-text">Event on <i class="far fa-clock"></i> {{event_data.event_start_date|date:"d M,Y"}} - {{event_data.event_end_date|date:"d M,Y"}}</p>
+                <a class="cardlink" href="{% url 'get_involve' %}">Join Event</a>&nbsp;&nbsp;&nbsp;<a class="cardlink" href="{% url 'event_details' event_data.event_heading event_data.id %}">Event Details</a>
+              </div>
+            </div>
+        {% endfor %}
+  
+      </div>
+    </div>
+    {% endif %}
+  
+  
+  </section>
 
 
 <section>
@@ -633,13 +669,8 @@
               <div class="card-header text-white" style="background-color: #3b5998;font-weight: bold;">Facebook</div>
               <div class="card-body p-0">
                 <div id="fb-root"></div>
-                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0" nonce="lXIoOnAs"></script>
-                <div class="fb-post" data-href="https://www.facebook.com/ashish.upadhyay.9404362/posts/3779679688820657" data-width="500" data-show-text="true">
-                  <blockquote cite="https://www.facebook.com/ashish.upadhyay.9404362/posts/3779679688820657" class="fb-xfbml-parse-ignore">
-                    <p>नमन्...सावरकर साहेब !!#जय_हिंद</p>Posted by <a href="https://www.facebook.com/ashish.upadhyay.9404362">Ashish Bhardwaj</a> on&nbsp;
-                    <a href="https://www.facebook.com/ashish.upadhyay.9404362/posts/3779679688820657">Friday, 28 May 2021</a>
-                  </blockquote>
-                </div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0" nonce="elnXaofl"></script>
+                <div class="fb-page" data-href="https://www.facebook.com/weashishbhardwaj/" data-tabs="timeline" data-width="500" data-height="560" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/weashishbhardwaj/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/weashishbhardwaj/">Ashish Bhardwaj</a></blockquote></div>
               </div>
             </div>
 

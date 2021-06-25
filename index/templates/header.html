@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body style="font-family: 'Varela Round', sans-serif;">
   <style>
@@ -108,6 +109,8 @@
             <a style="text-decoration:none;color: white;" href="{{about_us.social_instagram}}"> <i class="fab fa-instagram" aria-hidden="true" style="font-size: 25px;"></i></a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a style="text-decoration:none;color: white;" href="{{about_us.wikipedia}}"> <i class="fab fa-wikipedia-w" aria-hidden="true" style="font-size: 25px;"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;font-size: 25px;font-weight: bolder;" href="{{about_us.koo}}"><img width="30px" height="30px" src="../../media/images/koo.png" alt="Koo"></a>
           </div>
         </div>
         {% endfor %}
@@ -134,8 +137,22 @@
                 <a class="nav-link nav-link-hover" href="{% url 'about_us'%}">About</a>
               </li>
   
-              <li class="nav-item">
-                <a class="nav-link nav-link-hover" href="{% url 'gallery' %}">Gallery</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Gallery
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  {% for category_data in category_data%}
+
+                  {% if category_data.is_dropdown %}
+                  <a class="dropdown-item" href="{% url 'gallery_detail' category_data.category %}">{{category_data.category}}</a>
+                  {% endif %}
+                  {%empty%}
+                  <a class="dropdown-item" href="{% url 'gallery' %}">gallery</a>
+                  {% endfor %}
+                </div>
+
               </li>
   
               <li class="nav-item">
@@ -148,16 +165,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="{% url 'press' "News" %}">News</a>
-                  <a class="dropdown-item" href="{% url 'press' "Editorial" %}">Editorial</a>
+                  <a class="dropdown-item" href="{% url 'press' "Debate" %}">Debate</a>
                   <a class="dropdown-item" href="{% url 'press' "Interviews" %}">Interviews</a>
-                  <a class="dropdown-item" href="{% url 'press' "Critics" %}">Critics</a>
                   <a class="dropdown-item" href="{% url 'press' "Press releases" %}">Press releases</a>
-                </div>
-
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
-                </div>
-
+                </div>              
               </li>
 
               <li class="nav-item dropdown">
@@ -182,8 +193,9 @@
 {% block body %}
 
 {% endblock %}
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.1.0/jquery-migrate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.1.0/jquery-migrate.min.js"></script>-->
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
@@ -231,37 +243,211 @@
   
   </script>
 <footer>
-  {% for about_us in about_us%}
-  <div class="container-fluid" style="bottom:0;margin-bottom: 0px;margin-top:60px; background-color: #f93; font-family: 'Varela Round', sans-serif;">
+  <style>
+    .contact{
+      background: transparent;
+      border-style:none none solid none;
+      border-radius:0;
+      color:white!important;
+    }
+    .contact:focus{
+      outline-style: none;
+      box-shadow: none;
+      background-color:transparent;
+      border-color: #f93;
+      color:white!important;
+    }
+
+    .contact::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color:white!important;
+    }
+
+    .hero-image {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../media/images/map.jpg");
+      background-color: #cccccc;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+  </style>
+  <div class="container-fluid hero-image" style="bottom:0;margin-bottom: 0px;margin-top:60px;font-family: 'Varela Round', sans-serif;">
     <div class="row">
-      <div class="col-lg-9 col-sm-9 col-md-9" style="padding:10px; color:white">
+      <div class="col-sm-4 col-md-4 col-lg-4"></div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
           <br>
-          <div class="">
-           <div class="card shadow-lg p-2 mb-2  rounded" style="width: 340px;border: 1px solid#D5D5D5; font-family: 'Varela Round', sans-serif; background-color:#f93;">
-               <div class="card-header">
-                <h5><b>Contact Details:</b></h5>
-                <b>{{about_us.name}} </b>  <br>
-                <i class="fas fa-phone-alt" aria-hidden="true" style="color: white;"></i>  {{about_us.phone_number}} <br>
-                <i class="fa fa-envelope" aria-hidden="true" style="color: white;"></i>  {{about_us.email_id}}
-               </div>
-            </div>
-          </div>
+          <center><h4 class="font-weight-bold text-center" style="text-align:center;color: white !important;;">Contact us</h4></center>
       </div>
-  
-      <div class="col-lg-3 col-sm-3 col-md-3" style="padding:20px; color:white;">
-          <h5><b>Quick Links</b></h5><br>
-          <a style="text-decoration:none;color: white;" href="{{about_us.social_facebook}}"> <i class="fab fa-facebook" aria-hidden="true" style="font-size: 35px;"></i></a>  &nbsp;
-          <a style="text-decoration:none;color: white;" href="{{about_us.social_twitter}}"> <i class="fab fa-twitter" aria-hidden="true" style="font-size: 35px;"></i></a>&nbsp;
-          <a style="text-decoration:none;color: white;" href="{{about_us.social_youtube}}"> <i class="fab fa-youtube" aria-hidden="true" style="font-size: 35px;"></i></a>  &nbsp;
-          <a style="text-decoration:none;color: white;" href="{{about_us.social_instagram}}"> <i class="fab fa-instagram" aria-hidden="true" style="font-size: 35px;"></i></a>  &nbsp;
-          <br><br>
-          <p><i class="fa fa-copyright" aria-hidden="true" style="color: white;font-size: 25px;"></i> Copyright <script>document.write(new Date().getFullYear())</script> - All rights reserved</p>
-          <p></p>
+      <div class="col-sm-4 col-md-4 col-lg-4"></div>
+    </div>
+    <hr style="width:75px;height:3px;margin:auto;" color="white"><br>
+
+    <div class="row">
+     
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <!-- Contact Form Start-->
+            <br>
+            <form id="contact_form" method="POST">
+                  
+                  <div class="controls">
+                      <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12" id="alert_box">
+
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6 col-sm-6">
+                              <div class="form-group">
+                                  <input id="form_name" type="text" name="name" class="form-control contact" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                              </div>
+                          </div>
+
+                          <div class="col-md-6 col-sm-6">
+                              <div class="form-group">                                  
+                                  <input id="form_lastname" type="text" name="surname" class="form-control contact" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">                                  
+                              </div>
+                          </div>
+
+                      </div><br>
+
+                      <div class="row">
+
+                          <div class="col-md-6 col-sm-6">
+                              <div class="form-group">                                  
+                                  <input id="form_email" type="email" name="email" class="form-control contact" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">                                  
+                              </div>
+                          </div>
+
+                          <div class="col-md-6 col-sm-6">
+                              <div class="form-group">
+                                  <div class="form-group">                                      
+                                      <input id="subject" type="text" name="subject" class="form-control contact" placeholder="Please enter the subject" required="required" data-error="Subject is required.">                                      
+                                  </div>                                  
+                              </div>
+                          </div>
+
+                      </div><br>
+
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                              <div class="form-group">
+                                  <textarea style="resize:none;" id="form_message" name="message" class="form-control contact" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                              </div>
+                          </div>
+                          <div class="col-md-12">
+                              <br>
+                              <input type="submit" class="btn btn-success btn-send" value="Send message">
+                          </div>
+                      </div>
+
+                  </div>
+              
+            </form>
+
+            <script>
+              $(document).ready(function() {
+                    const contact     = document.getElementById('contact_form');
+                    const alertbox    = document.getElementById('alert_box');
+                    const formdata    = new FormData()
+                    $('#contact_form').on('submit', function(e){
+                      e.preventDefault();
+                      $.ajax({
+                        type:'POST',
+                        url:"{% url 'index' %}",
+                        data:{
+                          name : $('#form_name').val(),
+                          surname : $('#form_lastname').val(),
+                          email:$('#form_email').val(),
+                          subject:$('#subject').val(),
+                          message:$('#form_message').val(),
+                          csrfmiddlewaretoken: '{{ csrf_token }}',
+                          dataType: "json",
+                        },
+                        success:function(response){
+                          contact.reset()
+                          alertbox.innerHTML=`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Thanks for sharing your problem!
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>`
+                        },
+                        error:function(error){
+                          alertbox.innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                Ups... something went wrong
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>`
+                        },
+                      });               
+                
+                    });
+              });
+            </script>
+
+            
+        <!-- Contact Form End-->
+
       </div>
 
-    </div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        {% for about_us in about_us%}
+          <div style="font-size: 25px;color: white;">
+            <h5 style="font-weight:bold;font-size:25px;color: white;">EMAIL ADDRESS</h5><br>
+            <i class="fas fa-envelope" aria-hidden="true" style="color: white;font-size:20px;"></i>&nbsp;&nbsp;&nbsp;{{about_us.email_id}}
+          </div><br>
+
+          <div style="font-size: 25px;color: white;">
+            <h5 style="font-weight:bold;font-size:25px;color: white;">PHONE</h5><br>
+            <i class="fas fa-phone-alt" aria-hidden="true" style="color: white;font-size:20px;"></i>&nbsp;&nbsp;&nbsp;{{about_us.phone_number}}
+          </div><br>
+
+          <div style="font-size: 25px; color: white;">
+            <h5 style="font-weight:bold;font-size:25px;color: white;">LOCATION</h5><br>
+            <i class="fas fa-map-marker-alt" aria-hidden="true" style="color: white;font-size:20px;"></i>&nbsp;&nbsp;&nbsp;{{about_us.location}}
+          </div>
+
+        {% endfor %}
+
+      </div>
+      
+    </div><br><br>
+
   </div>
-  {% endfor %}
+  <div class="container-fluid" style="background-color:#1a1a1a;">
+    <div class="row">
+      <div class="col-sm-12 col-lg-12 col-md-12 p-3">
+        <br>
+        <div class="text-center text-white">
+          <h2 style="font-weight: bolder;">Ashish bhardwaj</h2>
+        </div>
+      </div>
+    </div>
+
+    {% for about_us in about_us%}
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 col-md-12 p-3 text-center">
+            <a style="text-decoration:none;color: white;" href="{{about_us.social_facebook}}"> <i class="fab fa-facebook" aria-hidden="true" style="font-size: 25px;"></i></a>  
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;" href="{{about_us.social_twitter}}"> <i class="fab fa-twitter" aria-hidden="true" style="font-size: 25px;"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;" href="{{about_us.social_youtube}}"> <i class="fab fa-youtube" aria-hidden="true" style="font-size: 25px;"></i></a>  
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;" href="{{about_us.social_instagram}}"> <i class="fab fa-instagram" aria-hidden="true" style="font-size: 25px;"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;" href="{{about_us.wikipedia}}"> <i class="fab fa-wikipedia-w" aria-hidden="true" style="font-size: 25px;"></i></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration:none;color: white;font-size: 25px;font-weight: bolder;" href="{{about_us.koo}}"><img width="30px" height="30px" src="../../media/images/koo.png" alt="Koo"></a>
+          </div>
+        </div>
+    {% endfor %}
+    <br>
+    <hr width="90%" color="white">
+    <p style="margin-left: 5%;color: white;">Copyright © Ashish bhardwaj <script>document.write(new Date().getFullYear())</script> All Rights Reserved.</p>
+
+
+  </div>
 
 </footer>
 </body>

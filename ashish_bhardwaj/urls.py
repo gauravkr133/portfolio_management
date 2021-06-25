@@ -43,11 +43,14 @@ urlpatterns = [
     path('videos/',index_views.videos,name="videos"),
     path('press/<str:type>',index_views.press,name="press"),
     path('press_detail/<int:id>',index_views.press_detail,name="press_detail"),
+    path('event_details/<str:event_heading>/<int:event_id>',index_views.event_details,name="event_details"),
     path('contact_us/',index_views.contact_us,name="contact_us"),
+    path('volunteer/',index_views.volunteer,name="volunteer"),
+    path('get_involve/',index_views.get_involve,name="get_involve"),
     path('blog/',blog_views.blog,name="blog"),
     path('blog_detail/<slug:slug>',blog_views.blog_detail,name="blog_detail"),
     path('category/<str:category_name>',blog_views.category_detail,name="category_detail",),
-    path('category/',blog_views.category_detail,name="category_detail",)
+    path('category/',blog_views.category_detail,name="category_detail",),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
