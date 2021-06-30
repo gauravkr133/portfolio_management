@@ -148,7 +148,8 @@ STATIC_ROOT =  os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT  =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL   =  '/media/'
 
-
+EMAIL_ID    = str(os.getenv('EMAIL_ID'))
+EMAIL_PASS  = str(os.getenv('EMAIL_PASS'))
 
 X_FRAME_OPTIONS = 'ALLOWALL'
 

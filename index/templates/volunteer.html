@@ -76,7 +76,7 @@
                     </div>
                 </div>               
                 
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" id="Submit" class="btn btn-success">Register</button>
 
                 </form>
 
@@ -85,6 +85,7 @@
                         const form_id     = document.getElementById('volunteer');
                         const alertbox    = document.getElementById('alertBox');
                         $('#volunteer').on('submit', function(e){
+                            $("#Submit").attr("disabled",true);
                             e.preventDefault();
                             $.ajax({
                                 type:'POST',
@@ -103,14 +104,16 @@
                                 },
                                 success:function(response){
                                     form_id.reset()
-                                    alertbox.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                            Registration successful..
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    $("#Submit").attr("disabled", false);
+                                    alertbox.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">`
+                                                            +response.message+
+                                                            `<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>`
                                 },
                                 error:function(error){
+                                    $("#Submit").attr("disabled", false);
                                     alertbox.innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                         Ups... something went wrong
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
