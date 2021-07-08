@@ -40,7 +40,7 @@
 
                 <div class="form-row">
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="Email">Select Event:</label>
                         <select class="form-control" id="event" name="event">
                             <option>Select a event</option>
@@ -50,9 +50,14 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="Name">Phone Number:</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone no." required>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone no. without country code" required>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="Email">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                     </div>
 
                 </div>
@@ -84,6 +89,7 @@
                                     lastname     : $('#lastname').val(),
                                     event_id     : $('#event').val(),
                                     phone_number : $('#phone').val(),
+                                    email        : $('#email').val(),
                                     about        : $('#message').val(),
                                     csrfmiddlewaretoken: '{{ csrf_token }}',
                                     dataType: "json",

@@ -14,13 +14,14 @@ def sendmail(send_to,message):
 
 
 context = {}
-about_us = About.objects.all()
-context['about_us'] = about_us
-
-dropdown_data = Category.objects.filter(is_dropdown=True)
-context['dropdown_data'] = dropdown_data
 
 def index(request):
+    about_us = About.objects.all()
+    context['about_us'] = about_us
+
+    dropdown_data = Category.objects.filter(is_dropdown=True)
+    context['dropdown_data'] = dropdown_data
+
     slider_img = Image.objects.filter(category__category__contains="Slider").filter(is_active=True)
     context['slider_img'] = slider_img
 
@@ -154,6 +155,8 @@ def volunteer(request):
                     Volunteer_details.save()
                     message = "Hello "+first_name+" welcome to weashishbhardwaj. \n Thank you for joining us."
                     sendmail(email,message)
+                    message = first_name+" "+last_name+" has registered as volunteer to your website. \n You can contact him at his \n"+"email: "+email+"\n Phone: "+phone_number
+                    sendmail(about_us[0].email_id,message)
                     return JsonResponse({'message':'Registration successful...'})
                 except:
                     return JsonResponse({'message':'Something went wrong...'})
@@ -170,11 +173,16 @@ def get_involve(request):
             event_id        = request.POST.get('event_id')
             event_inst      = Event.objects.get(id=event_id)
             phone_number    = request.POST.get('phone_number')
+            email           = request.POST.get('email')
             about           = request.POST.get('about')
-            if(first_name and last_name and event_id and phone_number and about):
+            if(first_name and last_name and event_id and phone_number and about and email):
                 try:
                     get_involve_details = GetInvolve(first_name=first_name,last_name=last_name,event_id=event_inst,phone_number=phone_number,about=about)
                     get_involve_details.save()
+                    message = "Hello "+first_name+" you have successfully registered for "+event_inst.event_heading+" event"
+                    sendmail(email,message)
+                    message = "Hello "+first_name + last_name +"has registered for "+event_inst.event_heading+" event"
+                    sendmail(about_us[0].email_id,message)
                     return JsonResponse({'message':'You have successfully registered for the event...'})
                 except:
                     return JsonResponse({'message':'Something went wrong...'})

@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="{% static 'css/ihover.css' %}" rel="stylesheet">
+<link href="{% static 'css/ihover.min.css' %}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body style="font-family: 'Varela Round', sans-serif;">
@@ -204,41 +206,7 @@
       once: true
     });
   });
-
-  $(document).ready(function () {
-
-    $(".filter-button").click(function () {
-        var value = $(this).attr('data-filter');
-
-        if (value == "all") {
-            $('.filter').show('1000');
-        }
-        else {
-            $(".filter").not('.' + value).hide('3000');
-            $('.filter').filter('.' + value).show('3000');
-
-        }
-    });
-
-    if ($(".filter-button").removeClass("active")) {
-        $(this).removeClass("active");
-    }
-
-    $(this).addClass("active");
-
-    $(function() {              
-      $(".filter-button").click(function() { 
-        $(".filter-button").removeClass("active-border");
-        $(this).addClass("active-border");
-      });
-    });
-
-  });
 </script>
-
-<script>
-  
-  </script>
 <footer>
   <style>
     .contact{

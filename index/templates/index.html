@@ -48,7 +48,7 @@
                 {%if about.about_thumbnail%}
                 <img src="{{about.about_thumbnail.url}}" class="img-fluid rounded border border-dark" alt="Ashish Bhardwaj">
                 {%else%}
-                <img src="{{ STATIC_URL }}images/avatar.png" class="img-fluid rounded border border-dark" alt="Ashish Bhardwaj">
+                <img src="../../static/images/avatar.png" class="img-fluid rounded border border-dark" alt="Ashish Bhardwaj">
                 {%endif%}
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-left" data-aos-duration="2000">
@@ -375,6 +375,7 @@
         <div class="date-content">
             <div class="date-outer">
                 <span class="date">
+                  <span class="month">{{journey_data.date|date:"d"}}</span>
                   <span class="month">{{journey_data.date|date:"M"}}</span>
                   <span class="year">{{journey_data.date|date:"Y"}}</span>
                 </span>
@@ -406,34 +407,24 @@
 	</div>
 
   <div class="container-fluid">
-    <style>
-      .active-border{
-        border-style: double none double none;
-        border-color: black;
-      }
-    </style>
-    <div class="row text-center" data-aos="fade-up" data-aos-duration="2000">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <span style="font-size: 25px;color:#ff9933;cursor:pointer;" class="filter-button active active-border" data-filter="all">All</span>
-        {% for category_data in category_data%}
-          <span style="font-size: 25px; color:#ff9933;cursor:pointer;" class="ml-2 p-2 filter-button" data-filter="{{ category_data.category|cut:" " }}">{{category_data.category}}</span>
-        {% endfor %}
+    <div class="row">
+      {% for img_data in img_data %}
+      <div class="mt-3 col-sm-4 col-md-4 col-lg-4 col-xs-4">
+        <div class="ih-item square effect4 colored"><a href="#" class="disabled">
+          <div class="img"><img height="300px" src="{{img_data.image.url}}" alt="img"></div>
+          <div class="mask1"></div>
+          <div class="mask2"></div>
+          <div class="info">
+            <h3>{{img_data.img_caption}}</h3>
+          </div></a></div>
       </div>
-    </div><br>
+      {% endfor %}
 
-    <div class="row text-center p-3" data-aos="fade-up" data-aos-duration="2000">
-
-        {% for img_data in img_data %}
-          <div class="mt-2 ml-1 col-xs-12 col-sm-6 col-md-3 filter {{img_data.category|cut:" "}}">                  
-            <a href="{% url 'gallery_detail' img_data.category %}">                  
-              <img height="300px" width="100%" src="{{img_data.image.url}}" alt="{{img_data.img_caption}}">                  
-            </a>             
-          </div>
-        {% endfor %}
-        
     </div>
-
+    <br><br>
   </div>
+
+
 
 </section>
 

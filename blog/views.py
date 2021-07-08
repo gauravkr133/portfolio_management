@@ -5,17 +5,21 @@ from django.db.models import Count
 
 
 context = {}
-about_us = About.objects.all()
-context['about_us'] = about_us
 
-latest_blog_data = Blogpost.objects.filter(is_active=True).order_by('-post_id')[:4]
-context['latest_blog_data'] = latest_blog_data
-
-category_data = Blogpost.objects.values('post_category__blog_category').exclude(post_category__isnull=True).annotate(category_count=Count('post_category'))
-context['category_data'] = category_data
 
 def blog(request):
-    
+    about_us = About.objects.all()
+    context['about_us'] = about_us
+
+    latest_blog_data = Blogpost.objects.filter(is_active=True).order_by('-post_id')[:4]
+    context['latest_blog_data'] = latest_blog_data
+
+    category_data = Blogpost.objects.values('post_category__blog_category').exclude(post_category__isnull=True).annotate(category_count=Count('post_category'))
+    context['category_data'] = category_data
+
+    dropdown_data = Category.objects.filter(is_dropdown=True)
+    context['dropdown_data'] = dropdown_data
+
     blog_data = Blogpost.objects.filter(is_active=True)
     context['blog_data'] = blog_data
     return render(request,"blog.html",context)
