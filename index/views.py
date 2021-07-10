@@ -135,6 +135,9 @@ def contact_us(request):
     return render(request,"contact_us.html",context)
 
 def volunteer(request):
+    about_us = About.objects.all()
+    context['about_us'] = about_us
+
     if request.is_ajax():
         if request.POST:
             first_name      = request.POST.get('firstname')
@@ -164,8 +167,12 @@ def volunteer(request):
     
 
 def get_involve(request):
+    about_us = About.objects.all()
+    context['about_us'] = about_us
+
     event_data = Event.objects.filter(is_active=True)
     context['event_data'] = event_data
+    
     if request.is_ajax():
         if request.POST:
             first_name      = request.POST.get('firstname')
