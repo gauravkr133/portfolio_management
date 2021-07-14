@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.enums import Choices
+from django.db.models.fields import BigAutoField
 from django.db.models.query_utils import PathInfo
 from froala_editor.fields import FroalaField
 from datetime import datetime    
@@ -48,13 +49,23 @@ class Journey(models.Model):
     id          = models.BigAutoField(primary_key=True)
     date        = models.DateField(blank=True,help_text = "Please use the following format: <em>YYYY-MM-DD</em>.")
     heading     = models.CharField(max_length = 100,blank=True)
-    description = models.TextField(max_length=500)
+    description = FroalaField()
     is_active   = models.BooleanField(default=True)
     def __str__(self):
         return self.heading
 
+class Video_category(models.Model):
+    id                    = models.BigAutoField(primary_key=True)
+    video_category        = models.CharField(max_length = 100)
+    is_dropdown           = models.BooleanField(default=False)
+    is_active             = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.video_category
+
 class Video(models.Model):
     id              = models.BigAutoField(primary_key=True)
+    category        = models.ForeignKey(Video_category,on_delete = models.CASCADE,blank=True,null=True)
     video_caption   = models.CharField(max_length = 100)
     video_thumbnail = models.ImageField(upload_to='images/',blank=True)
     video_file      = models.FileField(upload_to='videos/',blank=True,null=True)
@@ -67,37 +78,38 @@ class Contact(models.Model):
     id         = models.BigAutoField(primary_key=True)
     first_name = models.CharField(max_length = 100)
     last_name  = models.CharField(max_length = 100)
-    email_id   = models.EmailField(max_length = 100)
+    email_id   = models.EmailField(max_length = 100,blank=True)
     subject    = models.CharField(max_length = 200)
     message    = models.TextField(max_length=500)
     def __str__(self):
         return self.first_name
 
-PRESS_CHOICES = (
-    ('news','news'),
-    ('debate','debate'),
-    ('interviews','interviews'),
-    ('press releases','press releases')
-)
+
+
+class Press_category(models.Model):
+    id                    = models.BigAutoField(primary_key=True)
+    press_category        = models.CharField(max_length = 100)
+    is_dropdown           = models.BooleanField(default=False)
+    is_active             = models.BooleanField(default=True)
+    def __str__(self):
+        return self.press_category
+
 class Press(models.Model):
     id                  = models.BigAutoField(primary_key=True)
-    type                = models.CharField(max_length=100,choices=PRESS_CHOICES)
-    video_caption       = models.CharField(max_length = 100,blank=True)
-    video_thumbnail     = models.ImageField(upload_to='images/',blank=True)
-    video_file          = models.FileField(upload_to='videos/',blank=True,null=True)
-    video_code          = models.CharField(max_length = 100,blank=True,null=True,help_text="Enter only video code of youtube video")
+    category            = models.ForeignKey(Press_category,on_delete = models.CASCADE,blank=True,null=True)
+    press_thumbnail     = models.ImageField(upload_to='images/',blank=True)
     press_heading       = models.CharField(max_length=300,blank=True, null=True)
-    press_description   = models.TextField(max_length=1000,blank=True)
+    press_description   = FroalaField()
     created_at          = models.DateField(help_text = "Please use the following format: <em>YYYY-MM-DD</em>.")
     is_active           = models.BooleanField(default=True)
     def __str__(self):
-        return self.type
+        return self.press_heading
 
 class Event(models.Model):
     id                          = models.BigAutoField(primary_key=True)
     event_poster                = models.ImageField(upload_to='images/',blank=True)
     event_heading               = models.CharField(max_length=200,blank=True)
-    event_description           = models.TextField(max_length=1000,blank=True)
+    event_description           = FroalaField()
     event_venue                 = models.CharField(max_length=150,blank=True)
     event_start_date            = models.DateTimeField(default=datetime.now)
     event_end_date              = models.DateTimeField(default=datetime.now)

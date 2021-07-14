@@ -19,8 +19,14 @@ def index(request):
     about_us = About.objects.all()
     context['about_us'] = about_us
 
-    dropdown_data = Category.objects.filter(is_dropdown=True)
-    context['dropdown_data'] = dropdown_data
+    gallery_dropdown_data = Category.objects.filter(is_dropdown=True)
+    context['gallery_dropdown_data'] = gallery_dropdown_data
+
+    press_dropdown_data = Press_category.objects.filter(is_dropdown=True)
+    context['press_dropdown_data'] = press_dropdown_data
+
+    video_dropdown_data = Video_category.objects.filter(is_dropdown=True)
+    context['video_dropdown_data'] = video_dropdown_data
 
     slider_img = Image.objects.filter(category__category__contains="Slider").filter(is_active=True)
     context['slider_img'] = slider_img
@@ -83,9 +89,14 @@ def gallery_detail(request,category):
         return redirect('gallery')
     return render(request,"gallery_detail.html",context)
 
-def videos(request):
-    video_data = Video.objects.all().filter(is_active=True)
-    context['video_data'] = video_data
+
+def videos(request,video_category):
+    try:
+        video_category_id = Video_category.objects.filter(video_category=video_category).first().id
+        video_data = Video.objects.all().filter(category=video_category_id,is_active=True)
+        context['video_data'] = video_data
+    except:
+        return redirect('index')
     return render(request,"videos.html",context)
 
 def event_details(request,event_heading,event_id):
@@ -96,10 +107,10 @@ def event_details(request,event_heading,event_id):
         return redirect('index')
     return render(request,"event_details.html",context)
 
-def press(request,type):
-    type = type.lower()
+def press(request,press_category):
     try:
-        press_data = Press.objects.filter(type=type,is_active=True)
+        press_category_id = Press_category.objects.filter(press_category=press_category).first().id
+        press_data = Press.objects.filter(category=press_category_id,is_active=True)
         context['press_data'] = press_data
     except:
         return redirect('index')
