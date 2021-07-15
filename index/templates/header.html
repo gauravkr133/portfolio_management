@@ -140,10 +140,20 @@
               <li class="nav-item">
                 <a class="nav-link nav-link-hover" href="{% url 'index'%}">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link nav-link-hover" href="{% url 'about_us'%}">About</a>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  About
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'about_us' %}">Introduction</a>
+                  <a class="dropdown-item" href="{% url 'journey' %}">Journey</a>
+                </div>
+
               </li>
-  
+              
+              
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Gallery

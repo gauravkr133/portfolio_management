@@ -1,8 +1,7 @@
 {% extends "header.html" %}
 
 {% block body%}
-  <br><br><br><br><br><br>
-  <section>
+  <section style="margin-top: 11%;">
     <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
           {% for slider_img in slider_img %}
@@ -383,7 +382,7 @@
         </div>
         <div class="timeline-content">
             <h5 class="title">{{journey_data.heading}}</h5>
-            <p class="description">{{journey_data.description}}</p>
+            <p class="description">{{journey_data.description|slice:":150"|safe}}</p>
         </div>
       </div>
       {% endfor %}

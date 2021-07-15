@@ -6,14 +6,29 @@ from django.http import JsonResponse
 from django.conf import settings
 import smtplib
 
+context = {}
+
 def sendmail(send_to,message):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
     s.login(settings.EMAIL_ID,settings.EMAIL_PASS)
     s.sendmail(settings.EMAIL_ID,send_to, message)
 
+def nav_data():
+    about_us = About.objects.all()
+    context['about_us'] = about_us
 
-context = {}
+    gallery_dropdown_data = Category.objects.filter(is_dropdown=True)
+    context['gallery_dropdown_data'] = gallery_dropdown_data
+
+    press_dropdown_data = Press_category.objects.filter(is_dropdown=True)
+    context['press_dropdown_data'] = press_dropdown_data
+
+    video_dropdown_data = Video_category.objects.filter(is_dropdown=True)
+    context['video_dropdown_data'] = video_dropdown_data
+
+
+
 
 def index(request):
     about_us = About.objects.all()
@@ -27,12 +42,9 @@ def index(request):
 
     video_dropdown_data = Video_category.objects.filter(is_dropdown=True)
     context['video_dropdown_data'] = video_dropdown_data
-
+    
     slider_img = Image.objects.filter(category__category__contains="Slider").filter(is_active=True)
     context['slider_img'] = slider_img
-
-    about_us = About.objects.all()
-    context['about_us'] = about_us
 
     category_data = Category.objects.exclude(category="Slider").filter(is_active=True)
     context['category_data'] = category_data
@@ -43,7 +55,7 @@ def index(request):
     video_data = Video.objects.all().filter(is_active=True)[0:4]
     context['video_data'] = video_data
 
-    journey_data = Journey.objects.all().filter(is_active=True)
+    journey_data = Journey.objects.all().filter(is_active=True)[0:4]
     context['journey_data'] = journey_data
 
     event_data = Event.objects.filter(is_active=True)
@@ -73,14 +85,23 @@ def index(request):
     return render(request,"index.html",context)
 
 def about_us(request):
+    nav_data()
     return render(request,"about_us.html",context)
 
+def journey(request):
+    nav_data()
+    journey_data = Journey.objects.all().filter(is_active=True)
+    context['journey_data'] = journey_data
+    return render(request,"journey.html",context)
+
 def gallery(request):
+    nav_data()
     gallery_data = Category.objects.exclude(category="Slider").filter(is_active=True)
     context['gallery_data'] = gallery_data
     return render(request,"gallery.html",context)
 
 def gallery_detail(request,category):
+    nav_data()
     try:
         img_category_id = Category.objects.filter(category=category).first().id
         category_filter_img = Image.objects.filter(category=img_category_id,is_active=True)
@@ -91,6 +112,7 @@ def gallery_detail(request,category):
 
 
 def videos(request,video_category):
+    nav_data()
     try:
         video_category_id = Video_category.objects.filter(video_category=video_category).first().id
         video_data = Video.objects.all().filter(category=video_category_id,is_active=True)
@@ -100,6 +122,7 @@ def videos(request,video_category):
     return render(request,"videos.html",context)
 
 def event_details(request,event_heading,event_id):
+    nav_data()
     try:
         event_data = Event.objects.filter(id=event_id,event_heading=event_heading)
         context['event_data'] = event_data
@@ -108,6 +131,7 @@ def event_details(request,event_heading,event_id):
     return render(request,"event_details.html",context)
 
 def press(request,press_category):
+    nav_data()
     try:
         press_category_id = Press_category.objects.filter(press_category=press_category).first().id
         press_data = Press.objects.filter(category=press_category_id,is_active=True)
@@ -117,6 +141,7 @@ def press(request,press_category):
     return render(request,"press.html",context)
 
 def press_detail(request,id):
+    nav_data()
     try:
         press_data_single = Press.objects.filter(id=id)
         context['press_data_single'] = press_data_single
@@ -125,6 +150,7 @@ def press_detail(request,id):
     return render(request,"press_detail.html",context) 
 
 def contact_us(request):
+    nav_data()
     context['msg'] = ""
     context['msg_type'] = ""
     if request.POST:
@@ -146,6 +172,7 @@ def contact_us(request):
     return render(request,"contact_us.html",context)
 
 def volunteer(request):
+    nav_data()
     about_us = About.objects.all()
     context['about_us'] = about_us
 
@@ -178,6 +205,7 @@ def volunteer(request):
     
 
 def get_involve(request):
+    nav_data()
     about_us = About.objects.all()
     context['about_us'] = about_us
 

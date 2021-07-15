@@ -38,6 +38,7 @@ urlpatterns = [
     path('froala_editor/',include('froala_editor.urls')),
     path('',index_views.index, name="index"),
     path('about_us/',index_views.about_us, name="about_us"),
+    path('journey/',index_views.journey, name="journey"),
     path('gallery/',index_views.gallery,name="gallery"),
     path('gallery_detail/<str:category>',index_views.gallery_detail,name="gallery_detail"),
     path('videos/<str:video_category>',index_views.videos,name="videos"),
