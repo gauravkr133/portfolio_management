@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.enums import Choices
 from django.db.models.fields import BigAutoField
 from django.db.models.query_utils import PathInfo
-from froala_editor.fields import FroalaField
+from tinymce.models import HTMLField 
 from datetime import datetime    
 
 class Category(models.Model):
@@ -29,11 +29,11 @@ class About(models.Model):
     id                  = models.BigAutoField(primary_key=True)
     heading             = models.CharField(max_length = 100)
     about_thumbnail     = models.ImageField(upload_to='images/',blank=True)
-    short_description   = models.TextField(blank=True)
-    description         = FroalaField()
+    short_description   = HTMLField()
+    description         = HTMLField()
     name                = models.CharField(max_length = 100,blank=True,null=True)
     location            = models.CharField(max_length = 100,blank=True,null=True)
-    phone_number        = models.CharField(max_length =15,blank=True,null=True)
+    phone_number        = models.CharField(max_length = 15,blank=True,null=True)
     email_id            = models.EmailField(max_length = 100,blank=True,null=True)
     social_facebook     = models.URLField(max_length = 500,blank=True,null=True)
     social_twitter      = models.URLField(max_length = 500,blank=True,null=True)
@@ -49,7 +49,7 @@ class Journey(models.Model):
     id          = models.BigAutoField(primary_key=True)
     date        = models.DateField(blank=True,help_text = "Please use the following format: <em>YYYY-MM-DD</em>.")
     heading     = models.CharField(max_length = 100,blank=True)
-    description = FroalaField()
+    description = HTMLField()
     is_active   = models.BooleanField(default=True)
     def __str__(self):
         return self.heading
@@ -99,7 +99,7 @@ class Press(models.Model):
     category            = models.ForeignKey(Press_category,on_delete = models.CASCADE,blank=True,null=True)
     press_thumbnail     = models.ImageField(upload_to='images/',blank=True)
     press_heading       = models.CharField(max_length=300,blank=True, null=True)
-    press_description   = FroalaField()
+    press_description   = HTMLField()
     created_at          = models.DateField(help_text = "Please use the following format: <em>YYYY-MM-DD</em>.")
     is_active           = models.BooleanField(default=True)
     def __str__(self):
@@ -109,7 +109,7 @@ class Event(models.Model):
     id                          = models.BigAutoField(primary_key=True)
     event_poster                = models.ImageField(upload_to='images/',blank=True)
     event_heading               = models.CharField(max_length=200,blank=True)
-    event_description           = FroalaField()
+    event_description           = HTMLField()
     event_venue                 = models.CharField(max_length=150,blank=True)
     event_start_date            = models.DateTimeField(default=datetime.now)
     event_end_date              = models.DateTimeField(default=datetime.now)

@@ -35,7 +35,7 @@ handler500 = 'index.views.view_500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('froala_editor/',include('froala_editor.urls')),
+    path('tinymce/', include('tinymce.urls')),
     path('',index_views.index, name="index"),
     path('about_us/',index_views.about_us, name="about_us"),
     path('journey/',index_views.journey, name="journey"),

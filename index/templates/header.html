@@ -127,9 +127,12 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" id="brand" href="{% url 'index' %}">
+        <img class="rounded" height="80px" width="80px" src="{% static 'images/bjp.png' %}"/>
+        &nbsp;&nbsp;
+        <a class="navbar-brand" id="brand" href="{% url 'index' %}" style="border-left: 3px solid #f93;">
+          &nbsp;
           <img class="rounded" src="{% static 'images/Ashish-bhardwaj-Logo-png.png' %}"/><br>
-          Nation First, Self Last
+          &nbsp;&nbsp; Nation First, Self Last
         </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="icon-bar top-bar"></span>
@@ -267,11 +270,11 @@
     }
 
     .footer-image {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../../media/images/map.jpg");
-      background-color: #cccccc;
-      background-position: center;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+      /*background-position: center;*/
       background-repeat: no-repeat;
       background-size: cover;
+      /*background-size: 100px 200px;*/
     }
 
   </style>
@@ -430,8 +433,9 @@
   <div class="container-fluid footer-image mb-0">
     <div class="row">
       <div class="col-sm-12 col-lg-12 col-md-12 p-3">
-        <div class="text-center text-white">
-          <h2 style="font-weight: bolder;">Ashish Bhardwaj</h2>
+        <div class="text-center text-white" style="font-size:xx-large;font-weight: bolder;">
+          <img style="padding-right:5px;border-right: 3px solid #f93;" height="80px" width="85px" src="{% static 'images/bjp.png' %}"/>
+          Ashish Bhardwaj
         </div>
       </div>
     </div>

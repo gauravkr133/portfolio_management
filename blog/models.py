@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils.text import slugify 
-from froala_editor.fields import FroalaField
+from tinymce.models import HTMLField 
 
 class Blogcategory(models.Model):
 	category_id 	= models.AutoField(primary_key=True)
@@ -18,7 +18,7 @@ class Blogpost(models.Model):
 	post_title    = models.CharField(max_length=50)
 	post_slug     = models.SlugField(blank=True)
 	post_category = models.ManyToManyField(Blogcategory,blank=True)
-	post_body     = FroalaField()
+	post_body     = HTMLField()
 	pub_date      = models.DateField(default=datetime.now)
 	thumbnail     = models.ImageField(upload_to='images/', default="",blank=True)
 	is_active     = models.BooleanField(default=True)
