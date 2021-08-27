@@ -50,7 +50,7 @@ def index(request):
     context['category_data'] = category_data
 
     img_data = Image.objects.exclude(category__category__contains="Slider").filter(is_active=True)
-    context['img_data'] = img_data
+    context['img_data'] = img_data[0:6]
     
     video_data = Video.objects.all().filter(is_active=True)[0:4]
     context['video_data'] = video_data
