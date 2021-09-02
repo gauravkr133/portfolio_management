@@ -43,14 +43,14 @@
         <hr style="width:75px;height:3px;margin:auto;" color="black"><br>
         {% for about in about_us %}
         <div class="row gy-3">
-            <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-right" data-aos-duration="2000">
+            <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-in" data-aos-duration="2000">
                 {%if about.about_thumbnail%}
                 <img src="{{about.about_thumbnail.url}}" height="550px" width="100%" class="rounded border border-dark" alt="Ashish Bhardwaj">
                 {%else%}
                 <img src="../../static/images/avatar.png" class="img-fluid rounded border border-dark" alt="Ashish Bhardwaj">
                 {%endif%}
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-left" data-aos-duration="2000">
+            <div class="col-sm-6 col-md-6 col-lg-6 p-3" data-aos="fade-in" data-aos-duration="2000">
                 <h4 class="font-weight-bold" style="color: #f93;">{{about.heading}}</h4>
                 <hr style="width:75px;height:3px;margin-left:0;" color="black">
                 <p>{{about.short_description|safe}}</p>
