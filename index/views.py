@@ -13,6 +13,7 @@ def sendmail(send_to,message):
     s.starttls()
     s.login(settings.EMAIL_ID,settings.EMAIL_PASS)
     s.sendmail(settings.EMAIL_ID,send_to, message)
+    
 
 def nav_data():
     about_us = About.objects.all()
@@ -61,7 +62,7 @@ def index(request):
     event_data = Event.objects.filter(is_active=True)
     context['event_data'] = event_data
 
-    new_initiative_data = Event.objects.filter(is_active=True,is_new_initiative=True)
+    new_initiative_data = Event.objects.filter(is_new_initiative=True)
     context['initiative_data'] = new_initiative_data
 
     blog_data = Blogpost.objects.filter(is_active=True).order_by('-post_id')[:3]
