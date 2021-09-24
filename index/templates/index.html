@@ -442,24 +442,26 @@
 
   <div class="container-fluid" data-aos="fade-up" data-aos-duration="2000">
     <div class="row mt-4 p-3">
-    
-      {% for event_data in initiative_data %}
-          {% if initiative_data %}
-          <div class="card border-primary col-sm-4 col-md-4 col-lg-4 mb-3 ml-2">
-            <img src="{{event_data.event_poster.url}}" height="350px" width="100%" class="card-img-top" alt="{{event_data.event_heading}}">
-            <div class="card-body">
-              <h5 class="card-title">{{event_data.event_heading}}</h5>
-              <p class="card-text">Event on <i class="far fa-clock"></i> {{event_data.event_start_date|date:"d M,Y"}} - {{event_data.event_end_date|date:"d M,Y"}}</p>
-              <a class="cardlink" href="{% url 'get_involve' %}">Join Event</a>&nbsp;&nbsp;&nbsp;<a class="cardlink" href="{% url 'event_details' event_data.event_heading event_data.id %}">Event Details</a>
-            </div>
-          </div>
-          {% endif %}
-          {% empty %}
-          <div class="col-sm-12 col-md-12 col-lg-12">
-            <p class="text-center" style="font-size:20px;">No New Initiatives</p>
-          </div>
-      {% endfor %}
 
+      {% for event_data in initiative_data %}
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          {% if initiative_data %}
+            <div class="card mb-3">
+              <img src="{{event_data.event_poster.url}}" height="350px" width="100%" class="card-img-top" alt="{{event_data.event_heading}}">
+              <div class="card-body">
+                <h5 class="card-title">{{event_data.event_heading}}</h5>
+                <p class="card-text">Event on <i class="far fa-clock"></i> {{event_data.event_start_date|date:"d M,Y"}} - {{event_data.event_end_date|date:"d M,Y"}}</p>
+                <a class="cardlink" href="{% url 'get_involve' %}">Join Event</a>&nbsp;&nbsp;&nbsp;<a class="cardlink" href="{% url 'event_details' event_data.event_heading event_data.id %}">Event Details</a>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% empty %}
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <p class="text-center" style="font-size:20px;">No New Initiatives</p>
+        </div>
+      {% endfor %}
+ 
     </div>
   </div>
 
@@ -475,7 +477,7 @@
 <br><br>
 
 
-<section>
+<!--<section>
   <style>
     .hovereffects{
        width: 100%;
@@ -599,7 +601,7 @@
     </div>
   </div>
 
-</section>
+</section>-->
 
 <section>
 <style>
