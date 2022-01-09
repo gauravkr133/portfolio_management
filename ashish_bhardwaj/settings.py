@@ -25,7 +25,7 @@ load_dotenv()
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -108,8 +108,14 @@ WSGI_APPLICATION = 'ashish_bhardwaj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
-if DEBUG == True:
+'''if DEBUG == True:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -124,7 +130,7 @@ else:
             'read_default_file': '/etc/mysql/my.cnf',
         },
     }
-    }
+    }'''
 
 
 
